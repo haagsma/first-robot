@@ -1,13 +1,12 @@
 package main;
 
-import java.awt.FlowLayout;
+import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 
 public class Main extends Comandos {
 
@@ -23,15 +22,19 @@ public class Main extends Comandos {
 //		} catch (Exception e) {
 //			// TODO: handle exception
 //		}
-		System.out.println(Toolkit.getDefaultToolkit().getScreenSize());
-		BufferedImage image = getRobot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
-		System.out.println(image);
 		
-		JFrame frame = new JFrame();
-		frame.getContentPane().setLayout(new FlowLayout());
-		frame.getContentPane().add(new JLabel(new ImageIcon(image)));
-		frame.pack();
-		frame.setVisible(true);
+//        final Dimension screenSize = Toolkit.getDefaultToolkit().
+//                getScreenSize();
+//        final BufferedImage screen = getRobot().createScreenCapture(
+//                new Rectangle(screenSize));
+//
+//        SwingUtilities.invokeLater(new Runnable() {
+//            public void run() {
+//                new ScreenCaptureRectangle(screen);
+//            }
+//        });
+		
+		Compare.compare();
 	}
 	
 
