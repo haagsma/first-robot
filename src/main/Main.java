@@ -1,15 +1,25 @@
 package main;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.border.Border;
 
 public class Main extends Comandos {
 
@@ -17,23 +27,27 @@ public class Main extends Comandos {
 	
 	public static boolean rodarStatus = true;
 	
+	public static String btnStatus = "Start";
+	
 	public static void rodar() {
 		if(rodarStatus) {
 			thread.start();
 			Grind.running = true;
+			btnStatus = "Stop";
 		}else {
 			createTred();
 			Grind.running = false;
+			btnStatus = "Start";
 		}
 		rodarStatus = !rodarStatus;
-		System.out.println(rodarStatus);
+//		System.out.println(rodarStatus);
 	}
 	
 	public static void createTred() {
 		try {
 			thread.interrupt();
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("Erro ao interromper a thread, mas faz parte...");
 		}
 		thread = new Thread() {
 			public void run() {
@@ -50,18 +64,7 @@ public class Main extends Comandos {
 	
 	public static void main(String[] args) {
 		createTred();
-		
-		// TODO Auto-generated method stub
-//		try {
-//			TimeUnit.SECONDS.sleep(3);
-//			press(Tecla.TAB);
-//			press(Tecla.T1);
-//			Rectangle rectangle = new Rectangle();
-//			getRobot().createScreenCapture(rectangle);
-//			System.out.println("Fim");
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
+		iniciarComponentes();
 		
 //        final Dimension screenSize = Toolkit.getDefaultToolkit().
 //                getScreenSize();
@@ -72,54 +75,46 @@ public class Main extends Comandos {
 //            public void run() {
 //                new ScreenCaptureRectangle(screen);
 //            }
-//        });
-		
-//		Compare.compare();
-		
-		
-		
-		
-//		try {
-//			TimeUnit.SECONDS.sleep(3);
-////			System.out.println("Iniciou");
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//		Grind.putCurrencyStatus();
-		
-		iniciarComponentes();
+//        });	
 	}
 	
 	private static void iniciarComponentes() {
         JFrame jFrame = new JFrame("Isso Aew");
-        jFrame.setLayout(new GridLayout(2,2));
+//        jFrame.setLayout(new GridLayout(1,0));
 
-        /*
-         * Um JPainel para adicionar os componentes JLabel e JTextField 
-         * que contém respectivamente o rótulo "Nome:" e o campo para edição. 
-         */
         JPanel panel1 = new JPanel();
-        panel1.setLayout(new GridLayout(1, 0));
-
-        JButton btn = new JButton("Start/Stop");
-        btn.addActionListener(new ActionListener(){  
-        	public void actionPerformed(ActionEvent e){  
-               rodar();
-            }  
-        }); 
+//        panel1.setBorder(BorderFactory.createEmptyBorder(0,10,10,10)); 
+        
+        JLabel label = new JLabel("Press the button to start the Bot");
+        JLabel ins2 = new JLabel("1 - Leave the digimon target selectabled in game");
+        JLabel ins3 = new JLabel("2 - Press Start Button and enter in game");
         
 
-        //Adição dos componentes ao JPanel
+        
+
+        JButton btn = new JButton(btnStatus);
+        btn.addActionListener(new ActionListener(){  
+        	public void actionPerformed(ActionEvent e){
+        		if(rodarStatus) {
+
+            		btn.setLabel("Stop");
+        		} else {
+        			btn.setLabel("Start");
+        		}
+        		
+               rodar();
+            }  
+        });
+        panel1.add(label);
         panel1.add(btn);
+        panel1.add(ins2);
+        panel1.add(ins3);
 
-
-        //Adição dos componentes JPanel ao JFrame
         jFrame.add(panel1);
 
-        //Ajusta automaticamente o tamanho da janela, alternativa ao setSize()
         jFrame.pack();
+        jFrame.setSize(350,200);
 
-        //Centraliza a janela
         jFrame.setLocationRelativeTo(null);
 
         jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
