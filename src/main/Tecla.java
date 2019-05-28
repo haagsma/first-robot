@@ -3,7 +3,13 @@ package main;
 import java.awt.event.KeyEvent;
 
 public class Tecla {
-	
+//	7 = ds tammer
+//			8 = hp tammer
+//			f7 = ds digi
+//			f8 = hp digi
+//			f1 and f2 are skills
+//			1 = normal attck
+//			4 = collect items
 	public static int TAB = KeyEvent.VK_TAB;
 	public static int T4 = KeyEvent.VK_4;
 	public static int T1 = KeyEvent.VK_1;

@@ -55,7 +55,7 @@ public class Grind extends Comandos {
 		food();
 //		System.out.println("checkDigimon");
 		if (Compare.compare(digimonDefault, getRobot().createScreenCapture(new Rectangle(1017,33,36,26)))) {
-//			System.out.println("São iguais");
+//			System.out.println("Sï¿½o iguais");
 			return true;
 		}else {
 			Comandos.press(Tecla.T4);
