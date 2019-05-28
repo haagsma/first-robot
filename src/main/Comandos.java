@@ -15,9 +15,13 @@ public class Comandos {
 	}
 	
 	public static void press(int key) {
-		getRobot().delay(500);
-		getRobot().keyPress(key);
-		getRobot().keyRelease(key);
+		try {
+			getRobot().delay(300);
+			getRobot().keyPress(key);
+			getRobot().keyRelease(key);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 }

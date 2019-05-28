@@ -6,17 +6,32 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Compare {
+public class Compare2 {
 	
-	public static boolean compare(BufferedImage imgA, BufferedImage imgB) {
-		
+	public static void compare() {
+		BufferedImage imgA = null; 
+        BufferedImage imgB = null; 
+  
+        try
+        { 
+            File fileA = new File("/home/Haagsma/Ã?rea de Trabalho/1-7-300x177.jpg"); 
+            File fileB = new File("/home/Haagsma/Ã?rea de Trabalho/2-5-300x177.jpg"); 
+  
+            imgA = ImageIO.read(fileA); 
+            imgB = ImageIO.read(fileB); 
+        } 
+        catch (IOException e) 
+        { 
+            System.out.println(e); 
+        } 
         int width1 = imgA.getWidth(); 
         int width2 = imgB.getWidth(); 
         int height1 = imgA.getHeight(); 
         int height2 = imgB.getHeight(); 
   
         if ((width1 != width2) || (height1 != height2)) 
-           return false;
+            System.out.println("Error: Images dimensions"+ 
+                                             " mismatch"); 
         else
         { 
             long difference = 0; 
@@ -53,7 +68,9 @@ public class Compare {
             // There are 255 values of pixels in total 
             double percentage = (avg_different_pixels / 
                                             255) * 100; 
-           return percentage <= 10; 
+  
+            System.out.println("Difference Percentage-->" + 
+                                                percentage); 
         } 
 	}
 }
