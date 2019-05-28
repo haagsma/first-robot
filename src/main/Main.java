@@ -86,8 +86,10 @@ public class Main extends Comandos {
 //        panel1.setBorder(BorderFactory.createEmptyBorder(0,10,10,10)); 
         
         JLabel label = new JLabel("Press the button to start the Bot");
-        JLabel ins2 = new JLabel("1 - Leave the digimon target selectabled in game");
-        JLabel ins3 = new JLabel("2 - Press Start Button and enter in game");
+        JLabel ins1 = new JLabel("1 - Your game need to be in full screen ");
+        JLabel ins11 = new JLabel("and with resolution 1920x1080");
+        JLabel ins2 = new JLabel("2 - Leave the digimon target selectabled in game");
+        JLabel ins3 = new JLabel("3 - Press Start Button and enter in game");
         
 
         
@@ -107,13 +109,15 @@ public class Main extends Comandos {
         });
         panel1.add(label);
         panel1.add(btn);
+        panel1.add(ins1);
+        panel1.add(ins11);
         panel1.add(ins2);
         panel1.add(ins3);
 
         jFrame.add(panel1);
 
         jFrame.pack();
-        jFrame.setSize(350,200);
+        jFrame.setSize(450,200);
 
         jFrame.setLocationRelativeTo(null);
 
