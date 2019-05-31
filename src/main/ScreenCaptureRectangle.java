@@ -70,12 +70,13 @@ public class ScreenCaptureRectangle extends Comandos {
 
         JOptionPane.showMessageDialog(null, panel);
 
-//        Color color = getRobot().getPixelColor(195,140);
+        Color color = getRobot().getPixelColor(217,67);
 //        Color color2 = getRobot().getPixelColor(195,141);
-//        System.out.println("Cor: "+(color.getRGB() == color2.getRGB()));
+        System.out.println("Cor: "+color.getRGB());
         
         System.out.println("Rectangle of interest: " + captureRect);
         BufferedImage image = getRobot().createScreenCapture(captureRect);
+        System.out.println();
 		
 		
 		JFrame frame = new JFrame();

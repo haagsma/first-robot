@@ -1,25 +1,20 @@
 package main;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Insets;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.border.Border;
+import javax.swing.SwingUtilities;
 
 public class Main extends Comandos {
 
@@ -36,6 +31,7 @@ public class Main extends Comandos {
 			btnStatus = "Stop";
 		}else {
 			createTred();
+//			Grind.putCurrencyStatus();
 			Grind.running = false;
 			btnStatus = "Start";
 		}
@@ -45,7 +41,7 @@ public class Main extends Comandos {
 	
 	public static void createTred() {
 		try {
-			thread.interrupt();
+			thread.stop();
 		} catch (Exception e) {
 			System.out.println("Erro ao interromper a thread, mas faz parte...");
 		}
@@ -65,7 +61,7 @@ public class Main extends Comandos {
 	public static void main(String[] args) {
 		createTred();
 		iniciarComponentes();
-		
+//		OpenBox.open();
 //        final Dimension screenSize = Toolkit.getDefaultToolkit().
 //                getScreenSize();
 //        final BufferedImage screen = getRobot().createScreenCapture(
