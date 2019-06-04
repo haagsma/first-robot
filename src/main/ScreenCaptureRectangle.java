@@ -74,15 +74,19 @@ public class ScreenCaptureRectangle extends Comandos {
 //        Color color2 = getRobot().getPixelColor(195,141);
 //        System.out.println("Cor: "+(color.getRGB() == color2.getRGB()));
         
-        System.out.println("Rectangle of interest: " + captureRect);
-        BufferedImage image = getRobot().createScreenCapture(captureRect);
+        try {
+            BufferedImage image = getRobot().createScreenCapture(captureRect);
+            System.out.println("Rectangle of interest: " + captureRect);
+		} catch (Exception e) {
+			System.out.println("Nothing selected");
+		}
 		
 		
-		JFrame frame = new JFrame();
-		frame.getContentPane().setLayout(new FlowLayout());
-		frame.getContentPane().add(new JLabel(new ImageIcon(image)));
-		frame.pack();
-		frame.setVisible(true);
+//		JFrame frame = new JFrame();
+//		frame.getContentPane().setLayout(new FlowLayout());
+//		frame.getContentPane().add(new JLabel(new ImageIcon(image)));
+//		frame.pack();
+//		frame.setVisible(true);
     }
 
     public void repaint(BufferedImage orig, BufferedImage copy) {

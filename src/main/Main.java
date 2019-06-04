@@ -1,25 +1,20 @@
 package main;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Insets;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.border.Border;
+import javax.swing.SwingUtilities;
 
 public class Main extends Comandos {
 
@@ -107,12 +102,34 @@ public class Main extends Comandos {
                rodar();
             }  
         });
+        
+        JButton btnScreen = new JButton("Dev");
+        btnScreen.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+		    	final Dimension screenSize = Toolkit.getDefaultToolkit().
+		              getScreenSize();
+		      final BufferedImage screen = getRobot().createScreenCapture(
+		              new Rectangle(screenSize));
+		
+		      SwingUtilities.invokeLater(new Runnable() {
+		          public void run() {
+		              new ScreenCaptureRectangle(screen);
+		          }
+		      });
+			}
+		});
+        
         panel1.add(label);
         panel1.add(btn);
         panel1.add(ins1);
         panel1.add(ins11);
         panel1.add(ins2);
         panel1.add(ins3);
+        
+        //Botão para selecionar e capturar coordenadas de tela
+        panel1.add(btnScreen);
 
         jFrame.add(panel1);
 
