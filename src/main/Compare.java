@@ -51,8 +51,9 @@ public class Compare {
                                           total_pixels; 
   
             // There are 255 values of pixels in total 
-            double percentage = (avg_different_pixels / 
-                                            255) * 100; 
+            double percentage = (avg_different_pixels / 255) * 100; 
+            
+           //Retorna um boolean se a porcentagem entre a diferença das imagens é menor ou igual a 10
            return percentage <= 10; 
         } 
 	}

@@ -3,7 +3,7 @@ package main;
 import java.awt.event.KeyEvent;
 
 public class Tecla {
-//	7 = ds tammer
+//			7 = ds tammer
 //			8 = hp tammer
 //			f7 = ds digi
 //			f8 = hp digi
