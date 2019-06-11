@@ -1,23 +1,31 @@
 package front;
 
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Date;
 
+import javax.persistence.NoResultException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import config.DbConfig;
+import entidades.User;
+
 public class Login {
+	
+	JFrame frame;
+	JLabel erro;
+	JLabel wait;
 	
 	public Login() {
 		
-		JFrame frame = new JFrame("Our Sistem");
+		frame = new JFrame("Our Sistem");
 		
 		JPanel painel = new JPanel();
 //		painel.setLayout(new GridLayout(3,0));
@@ -33,16 +41,14 @@ public class Login {
 		
 		
 
-		JLabel erro = new JLabel();
+		erro = new JLabel();
+		wait = new JLabel();
 		
 		JButton btn = new JButton("Entrar");
 		btn.addActionListener(new ActionListener(){  
         	public void actionPerformed(ActionEvent e){
         		if(!login.getText().isEmpty() && !senha.getText().isEmpty()) {
             		entrar(login.getText(), senha.getText());
-            		new Principal();
-            		frame.setVisible(false);
-            		frame.dispose();
         		}else {
         			erro.setText("login and password required");
         		}
@@ -54,6 +60,7 @@ public class Login {
 		painel.add(lbSenha);
 		painel.add(senha);
 		painel.add(btn);
+		painel.add(wait);
 		painel.add(erro);
 		
 		frame.add(painel);
@@ -75,7 +82,25 @@ public class Login {
 	}
 	
 	public void entrar(String login, String senha) {
-		System.out.println(login+"\n"+senha);
+		DbConfig db = new DbConfig();
+
+		try {
+			User user = db.getEm().createQuery("SELECT u FROM User u "
+					+ "WHERE username = :username "
+					+ "AND password = :password "
+					+ "AND expirate <= :date", User.class)
+					.setParameter("username", login)
+					.setParameter("password", senha)
+					.setParameter("date", new Date())
+					.getSingleResult();
+			System.out.println(user.getUsername());
+			new Principal();
+			frame.setVisible(false);
+			frame.dispose();
+		} catch (NoResultException e) {
+			System.out.println("Usuario não encontrado");
+		}
+
 	}
 
 }
