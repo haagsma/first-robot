@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 import config.DbConfig;
 import entidades.User;
@@ -21,10 +22,9 @@ public class Login {
 	
 	JFrame frame;
 	JLabel erro;
-	JLabel wait;
-	
+	JTextPane wait = new JTextPane();
 	public Login() {
-		
+		wait.setVisible(false);
 		frame = new JFrame("Our Sistem");
 		
 		JPanel painel = new JPanel();
@@ -39,18 +39,17 @@ public class Login {
 		JTextField senha = new JTextField();
 		senha.setPreferredSize(new Dimension (100,30));
 		
-		
-
 		erro = new JLabel();
-		wait = new JLabel();
 		
 		JButton btn = new JButton("Entrar");
 		btn.addActionListener(new ActionListener(){  
         	public void actionPerformed(ActionEvent e){
+        		wait.setVisible(true);
         		if(!login.getText().isEmpty() && !senha.getText().isEmpty()) {
+        			wait.setText("Wait, loading...");
             		entrar(login.getText(), senha.getText());
         		}else {
-        			erro.setText("login and password required");
+        			wait.setText("login and password required");
         		}
             }  
         });
@@ -88,7 +87,7 @@ public class Login {
 			User user = db.getEm().createQuery("SELECT u FROM User u "
 					+ "WHERE username = :username "
 					+ "AND password = :password "
-					+ "AND expirate <= :date", User.class)
+					+ "AND expirate > :date", User.class)
 					.setParameter("username", login)
 					.setParameter("password", senha)
 					.setParameter("date", new Date())
@@ -98,7 +97,7 @@ public class Login {
 			frame.setVisible(false);
 			frame.dispose();
 		} catch (NoResultException e) {
-			System.out.println("Usuario não encontrado");
+			wait.setText("Invalid Account...");
 		}
 
 	}
