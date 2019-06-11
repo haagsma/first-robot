@@ -22,20 +22,13 @@ public class Grind extends Comandos {
 	
 	public static void putCurrencyStatus () {
 
-//		System.out.println("putCurrencyDigimon");
 		digimonDefault = getRobot().createScreenCapture(new Rectangle(1017,33,36,26));
-		hpTammer = getRobot().getPixelColor(196,53);
-		System.out.println(hpTammer.getRGB());
-		dsTammer = getRobot().getPixelColor(191,68);
-		hpDigi = getRobot().getPixelColor(189,127);
-		dsDigi = getRobot().getPixelColor(195,140);
+//		System.out.println("putCurrencyDigimon");
+//		hpTammer = getRobot().getPixelColor(196,53);
+//		dsTammer = getRobot().getPixelColor(191,68);
+//		hpDigi = getRobot().getPixelColor(189,127);
+//		dsDigi = getRobot().getPixelColor(195,140);
 		
-		try {
-			TimeUnit.SECONDS.sleep(2);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		grindar();
 	}
 	

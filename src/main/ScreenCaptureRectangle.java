@@ -23,7 +23,7 @@ public class ScreenCaptureRectangle extends Comandos {
 
     Rectangle captureRect;
 
-    ScreenCaptureRectangle(final BufferedImage screen) {
+    public ScreenCaptureRectangle(final BufferedImage screen) {
         final BufferedImage screenCopy = new BufferedImage(
                 screen.getWidth(),
                 screen.getHeight(),
