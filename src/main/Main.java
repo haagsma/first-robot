@@ -31,6 +31,7 @@ public class Main extends Comandos {
 			btnStatus = "Stop";
 		}else {
 			createTred();
+//			Grind.putCurrencyStatus();
 			Grind.running = false;
 			btnStatus = "Start";
 		}
@@ -40,7 +41,7 @@ public class Main extends Comandos {
 	
 	public static void createTred() {
 		try {
-			thread.interrupt();
+			thread.stop();
 		} catch (Exception e) {
 			System.out.println("Erro ao interromper a thread, mas faz parte...");
 		}
@@ -60,7 +61,7 @@ public class Main extends Comandos {
 	public static void main(String[] args) {
 		createTred();
 		iniciarComponentes();
-		
+//		OpenBox.open();
 //        final Dimension screenSize = Toolkit.getDefaultToolkit().
 //                getScreenSize();
 //        final BufferedImage screen = getRobot().createScreenCapture(

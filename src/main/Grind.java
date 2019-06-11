@@ -25,6 +25,7 @@ public class Grind extends Comandos {
 //		System.out.println("putCurrencyDigimon");
 		digimonDefault = getRobot().createScreenCapture(new Rectangle(1017,33,36,26));
 		hpTammer = getRobot().getPixelColor(196,53);
+		System.out.println(hpTammer.getRGB());
 		dsTammer = getRobot().getPixelColor(191,68);
 		hpDigi = getRobot().getPixelColor(189,127);
 		dsDigi = getRobot().getPixelColor(195,140);
@@ -80,11 +81,15 @@ public class Grind extends Comandos {
 	}
 	
 	public static void food() {
-//		System.out.println("");
-		if(hpTammer.getRGB() != getRobot().getPixelColor(196,53).getRGB()) Comandos.press(Tecla.T7);
-		if(dsTammer.getRGB() != getRobot().getPixelColor(191,68).getRGB()) Comandos.press(Tecla.T8);
-		if(hpDigi.getRGB() != getRobot().getPixelColor(189,127).getRGB()) Comandos.press(Tecla.F7);
-		if(dsDigi.getRGB() != getRobot().getPixelColor(195,140).getRGB()) Comandos.press(Tecla.F8);
+//		System.out.println("");-16777165
+//		if(hpTammer.getRGB() != getRobot().getPixelColor(196,53).getRGB()) Comandos.press(Tecla.T7);
+//		if(dsTammer.getRGB() != getRobot().getPixelColor(191,68).getRGB()) Comandos.press(Tecla.T8);
+//		if(hpDigi.getRGB() != getRobot().getPixelColor(197,129).getRGB()) Comandos.press(Tecla.F7);
+//		if(dsDigi.getRGB() != getRobot().getPixelColor(195,140).getRGB()) Comandos.press(Tecla.F8);
+		if(getRobot().getPixelColor(196,53).getRGB() == -16777165) Comandos.press(Tecla.T7);
+		if(getRobot().getPixelColor(191,68).getRGB() == -16777165) Comandos.press(Tecla.T8);
+		if(getRobot().getPixelColor(197,129).getRGB() == -16777165) Comandos.press(Tecla.F7);
+		if(getRobot().getPixelColor(195,140).getRGB() == -16777165) Comandos.press(Tecla.F8);
 	}
 	
 }
