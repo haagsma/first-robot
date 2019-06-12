@@ -17,18 +17,23 @@ import javax.swing.JTextPane;
 
 import config.DbConfig;
 import entidades.User;
+import entidades.Version;
 
 public class Login {
 	
 	JFrame frame;
 	JLabel erro;
 	JTextPane wait = new JTextPane();
+	
 	public Login() {
 		wait.setVisible(false);
 		frame = new JFrame("Our Sistem");
 		
 		JPanel painel = new JPanel();
 //		painel.setLayout(new GridLayout(3,0));
+		
+		JLabel loadingVersion = new JLabel("Loading version... ");
+		JLabel updateVersion = new JLabel("You need update the version ");
 		
 		JLabel lbLogin = new JLabel("Login: ");
 		JTextField login = new JTextField();
@@ -54,13 +59,9 @@ public class Login {
             }  
         });
 
-		painel.add(lbLogin);
-		painel.add(login);
-		painel.add(lbSenha);
-		painel.add(senha);
-		painel.add(btn);
-		painel.add(wait);
-		painel.add(erro);
+		painel.add(loadingVersion);
+		
+		
 		
 		frame.add(painel);
 		
@@ -76,10 +77,38 @@ public class Login {
 	      		System.exit(0);
 	      	}
 	    });
+
 		
+		if(checkVersion()) {
+			painel.remove(loadingVersion);
+			painel.add(lbLogin);
+			painel.add(login);
+			painel.add(lbSenha);
+			painel.add(senha);
+			painel.add(btn);
+			painel.add(wait);
+			painel.add(erro);
+		}else {
+			painel.remove(loadingVersion);
+			painel.add(updateVersion);
+		}
+
+		frame.add(painel);
+		frame.pack();		
 		
 	}
 	
+	public boolean checkVersion() {
+		DbConfig db = new DbConfig();
+		try {
+			db.getEm().createQuery("SELECT v FROM Version v WHERE version = :version AND status  = 1", Version.class)
+			.setParameter("version", "1.0.0")
+			.getSingleResult();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 	public void entrar(String login, String senha) {
 		DbConfig db = new DbConfig();
 
@@ -92,8 +121,8 @@ public class Login {
 					.setParameter("password", senha)
 					.setParameter("date", new Date())
 					.getSingleResult();
-			System.out.println(user.getUsername());
-			new Principal();
+
+			new Principal(user);
 			frame.setVisible(false);
 			frame.dispose();
 		} catch (NoResultException e) {

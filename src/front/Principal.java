@@ -16,15 +16,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import entidades.User;
 import main.Comandos;
 import main.Main;
 import main.ScreenCaptureRectangle;
 
 public class Principal extends Comandos {
 
-	public Principal() {
+	public Principal(User user) {
 		JFrame jFrame = new JFrame("Our Sistem");
-      jFrame.setLayout(new GridLayout(3,0));
+      jFrame.setLayout(new GridLayout(4,0));
 
       JPanel panel1 = new JPanel();
 //      panel1.setBorder(BorderFactory.createEmptyBorder(0,10,10,10)); 
@@ -78,10 +79,9 @@ public class Principal extends Comandos {
       panel1.add(ins3);
       
       //Botão para selecionar e capturar coordenadas de tela
-     // panel1.add(btnScreen);
-      jFrame.add(titulo());
+      jFrame.add(titulo(user));
+      jFrame.add(expire(user));
       jFrame.add(btnStart());
-//      jFrame.add(panel1);
       jFrame.add(guide());
 
       jFrame.pack();
@@ -98,19 +98,27 @@ public class Principal extends Comandos {
       });
 	}
 	
-	public JPanel titulo() {
+	public JPanel titulo(User user) {
 		
 		JPanel painel = new JPanel();
-//		painel.setLayout(new GridLayout(1,0));
 		
-		JLabel label = new JLabel("Press the button to start the Bot");
+		JLabel label = new JLabel("Welcome "+user.getUsername());
 		
 		
 		painel.add(label);
 		
 		return painel;
 	}
-	
+	public JPanel expire(User user) {
+		JPanel painel = new JPanel();
+		
+		JLabel label = new JLabel("Expires in "+user.getExpirate().toString());
+		
+		painel.add(label);
+		
+		return painel;
+		
+	}
 	public JPanel btnStart() {
 
 		JPanel painel = new JPanel();
